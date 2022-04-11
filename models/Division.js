@@ -8,7 +8,7 @@ const Division = db.define("division", {
     primaryKey: true,
     allowNull: false
   },
-  industryId: {
+  sectorId: {
     type: DataTypes.STRING,
     allowNull: true;
   },

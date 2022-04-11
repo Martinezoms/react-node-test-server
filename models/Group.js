@@ -8,7 +8,7 @@ const Group = db.define('group', {
     primaryKey: true,
     allowNull: false
   },
-  sectorId: {
+  divisionId: {
     type: DataTypes.STRING,
     allowNull: true
   },

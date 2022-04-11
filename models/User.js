@@ -1,20 +1,32 @@
 const { DataTypes } = require('sequelize');
 const db = require('../utils/db');
 
-const Class = db.define('class', {
+const User = db.define('user', {
   id: {
+    allowNull: false,
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-    allowNull: false
-  },
-  groupId: {
-    type: DataTypes.STRING,
-    allowNull: true
+    primaryKey: true
   },
   name: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  sector: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  division: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  group: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  class: {
+    type: DataTypes.STRING,
+    allowNull: true
   },
   createdAt: {
     type: DataTypes.DATE,
@@ -26,4 +38,4 @@ const Class = db.define('class', {
   }
 });
 
-module.exports = Class;
+module.exports = User;
