@@ -1,14 +1,14 @@
 const {DataTypes} = require('sequelize')
 const db = require('../utils/db')
 
-const Category = db.define("category", {
+const Division = db.define("division", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull: false
   },
-  subSectorId: {
+  industryId: {
     type: DataTypes.STRING,
     allowNull: true;
   },
@@ -26,4 +26,4 @@ const Category = db.define("category", {
   }
 })
 
-module.exports = Category
+module.exports = Division

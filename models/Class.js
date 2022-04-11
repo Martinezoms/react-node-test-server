@@ -1,29 +1,29 @@
-const {DataTypes} = require('sequelize')
-const db = require('../utils/db')
+const { DataTypes } = require('sequelize');
+const db = require('../utils/db');
 
-const SubSector = db.define("subSector", {
+const Class = db.define('class', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull: false
   },
-  sectorId: {
+  subSectorId: {
     type: DataTypes.STRING,
-    allowNull: true;
+    allowNull: true
   },
   name: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  createdAt:{
+  createdAt: {
     type: DataTypes.DATE,
     allowNull: false
   },
   updatedAt: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: false
   }
-})
+});
 
-module.exports = SubSector
+module.exports = Class;

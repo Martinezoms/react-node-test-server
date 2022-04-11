@@ -1,12 +1,16 @@
 const { DataTypes } = require('sequelize');
 const db = require('../utils/db');
 
-const Industry = db.define('industry', {
+const Group = db.define('group', {
   id: {
-    allowNull: false,
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
-    primaryKey: true
+    primaryKey: true,
+    allowNull: false
+  },
+  sectorId: {
+    type: DataTypes.STRING,
+    allowNull: true
   },
   name: {
     type: DataTypes.STRING,
@@ -22,4 +26,4 @@ const Industry = db.define('industry', {
   }
 });
 
-module.exports = Industry;
+module.exports = Group;

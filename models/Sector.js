@@ -1,29 +1,25 @@
-const {DataTypes} = require('sequelize')
-const db = require('../utils/db')
+const { DataTypes } = require('sequelize');
+const db = require('../utils/db');
 
-const Sector = db.define("sector", {
+const Sector = db.define('sector', {
   id: {
+    allowNull: false,
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-    allowNull: false
-  },
-  industryId: {
-    type: DataTypes.STRING,
-    allowNull: true;
+    primaryKey: true
   },
   name: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  createdAt:{
+  createdAt: {
     type: DataTypes.DATE,
     allowNull: false
   },
   updatedAt: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: false
   }
-})
+});
 
-module.exports = Sector
+module.exports = Sector;
