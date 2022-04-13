@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../utils/db');
 
-const User = db.define('user', {
+const User = db.define('users', {
   id: {
     allowNull: false,
     type: DataTypes.UUID,
@@ -22,11 +22,15 @@ const User = db.define('user', {
   },
   group: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   class: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  agreement: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
   },
   createdAt: {
     type: DataTypes.DATE,

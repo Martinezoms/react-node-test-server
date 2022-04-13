@@ -1,11 +1,10 @@
 const divisionRoutes = require('express').Router();
 
-const { createDivision, getDivision, getAllDivisions, deleteDivision } = require('../controllers/division');
+const { createDivision, getAllDivisions, deleteDivision } = require('../controllers/division');
 
 // Routes
-userRoutes.post('/create', createDivision);
-divisionRoutes.get('/one', getDivision);
-divisionRoutes.get('/all', getAllDivisions);
-divisionRoutes.delete('/delete', deleteDivision);
+divisionRoutes.post('/create', createDivision);
+divisionRoutes.post('/all', getAllDivisions);
+divisionRoutes.post('/delete', deleteDivision);
 
 module.exports = divisionRoutes;

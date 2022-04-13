@@ -1,11 +1,11 @@
 const groupRoutes = require('express').Router();
 
-const { getGroup, createGroup, getAllGroups, deleteGroup } = require('../controllers/group');
+const { createGroup, getAllGroups, deleteGroup, deleteAllGroups } = require('../controllers/group');
 
 // Routes
 groupRoutes.post('/create', createGroup);
-groupRoutes.get('/one', getGroup);
-groupRoutes.get('/all', getAllGroups);
-groupRoutes.delete('/delete', deleteGroup);
+groupRoutes.post('/all', getAllGroups);
+groupRoutes.post('/delete', deleteGroup);
+groupRoutes.post('/deleteAll', deleteAllGroups);
 
 module.exports = groupRoutes;

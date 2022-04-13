@@ -1,4 +1,5 @@
 const Division = require('../models/Division');
+const sequelize = require('sequelize');
 
 exports.createDivision = async (req, res) => {
   const { name, sectorId } = req.body;
@@ -36,36 +37,6 @@ exports.createDivision = async (req, res) => {
     return res
       .status(200)
       .json({ success: true, divisionId: newDivision.id, name, message: 'Division created successfully' });
-  } catch (error) {
-    return res.status(401).json({ error: true, message: 'An error occurred' });
-  }
-};
-
-exports.getDivision = async (req, res) => {
-  const { id, sectorId } = req.body;
-
-  if (!id) {
-    return res.status(401).json({ error: true, message: 'Division Id is required' });
-  }
-
-  if (!sectorId) {
-    return res.status(401).json({ error: true, message: 'Sector Id is required' });
-  }
-
-  try {
-    const division = await Division.findOne({
-      where: { id, sectorId }
-    });
-
-    if (!division) {
-      return res.status(401).json({ error: true, message: 'Division does not exist' });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: division,
-      message: 'Division info fetched successfully'
-    });
   } catch (error) {
     return res.status(401).json({ error: true, message: 'An error occurred' });
   }

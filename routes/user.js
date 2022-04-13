@@ -1,10 +1,9 @@
-const userRoutes = require('express').Router();
-
 const { getUser, editUser, createUser } = require('../controllers/user');
+const userRoutes = require('express').Router();
 
 // Routes
 userRoutes.post('/create', createUser);
-userRoutes.get('/', getUser);
-userRoutes.put('/edit', editUser);
+userRoutes.post('/', getUser);
+userRoutes.post('/edit', editUser);
 
 module.exports = userRoutes;

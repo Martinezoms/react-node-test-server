@@ -1,29 +1,29 @@
-const {DataTypes} = require('sequelize')
-const db = require('../utils/db')
+const { DataTypes } = require('sequelize');
+const db = require('../utils/db');
 
-const Division = db.define("division", {
+const Division = db.define('divisions', {
+  sectorId: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     allowNull: false
   },
-  sectorId: {
-    type: DataTypes.STRING,
-    allowNull: true;
-  },
   name: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  createdAt:{
+  createdAt: {
     type: DataTypes.DATE,
     allowNull: false
   },
   updatedAt: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: false
   }
-})
+});
 
-module.exports = Division
+module.exports = Division;

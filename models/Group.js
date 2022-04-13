@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../utils/db');
 
-const Group = db.define('group', {
+const Group = db.define('groups', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,

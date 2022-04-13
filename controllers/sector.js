@@ -1,4 +1,5 @@
 const Sector = require('../models/Sector');
+const sequelize = require('sequelize');
 
 exports.createSector = async (req, res) => {
   const { name } = req.body;
@@ -17,7 +18,7 @@ exports.createSector = async (req, res) => {
   });
 
   if (currentSector.length) {
-    return res.status(401).json({ error: true, message: 'Category with this name already exists' });
+    return res.status(401).json({ error: true, message: 'Sector with this name already exists' });
   }
 
   try {
@@ -35,32 +36,6 @@ exports.createSector = async (req, res) => {
         message: 'Sector created successfully'
       });
     }
-  } catch (error) {
-    return res.status(401).json({ error: true, message: 'An error occurred' });
-  }
-};
-
-exports.getSector = async (req, res) => {
-  const { id } = req.body;
-
-  if (!id) {
-    return res.status(401).json({ error: true, message: 'Sector Id is required' });
-  }
-
-  try {
-    const sector = await Sector.findOne({
-      where: { id }
-    });
-
-    if (!sector) {
-      return res.status(401).json({ error: true, message: 'Sector does not exist' });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: sector,
-      message: 'Sector info fetched successfully'
-    });
   } catch (error) {
     return res.status(401).json({ error: true, message: 'An error occurred' });
   }

@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const validator = require('validator');
 
 exports.createUser = async (req, res) => {
   // Get request body
@@ -25,14 +26,6 @@ exports.createUser = async (req, res) => {
     return res.status(400).json({ error: true, message: 'Please agree to terms' });
   }
 
-  // Check if id already exists in DB
-  const userWithId = await User.findOne({ where: { id } });
-
-  // if id exists in DB, send response to client
-  if (userWithId !== null) {
-    return res.status(400).json({ error: true, message: 'User with Id already exist' });
-  }
-
   // create new user
   try {
     const user = await User.create({
@@ -40,7 +33,8 @@ exports.createUser = async (req, res) => {
       sector,
       division,
       group,
-      class: request.body.class,
+      class: req.body.class,
+      agreement: JSON.parse(agreement),
       createdAt: new Date(),
       updatedAt: new Date()
     });
@@ -64,11 +58,33 @@ exports.createUser = async (req, res) => {
   }
 };
 
+exports.getUser = async (req, res) => {
+  const id = req.body;
+  const user = await User.findOne({ where: id });
+
+  if (user === null) {
+    res.status(401).json({ error: true, message: 'User does not exist' });
+  } else {
+    res.status(200).json({
+      success: true,
+      message: 'Get user info successful',
+      user: {
+        id: user.id,
+        name: user.name,
+        sector: user.sector,
+        division: user.division,
+        group: user.group,
+        class: user.class
+      }
+    });
+  }
+};
+
 exports.editUser = async (req, res) => {
   const { id, name, sector, division, group, agreement } = req.body;
 
   if (!id) {
-    return res.status(401).json({ error: true, message: 'Item Id is required' });
+    return res.status(401).json({ error: true, message: 'User Id is required' });
   }
 
   const user = await User.findOne({
@@ -76,7 +92,7 @@ exports.editUser = async (req, res) => {
   });
 
   if (!user) {
-    return res.status(401).json({ error: true, message: 'Item not found' });
+    return res.status(401).json({ error: true, message: 'User not found' });
   }
 
   try {

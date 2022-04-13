@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../utils/db');
 
-const Sector = db.define('sector', {
+const Sector = db.define('sectors', {
   id: {
     allowNull: false,
     type: DataTypes.UUID,

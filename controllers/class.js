@@ -1,4 +1,5 @@
 const Class = require('../models/Class');
+const sequelize = require('sequelize');
 
 exports.createClass = async (req, res) => {
   const { name, groupId } = req.body;
@@ -34,36 +35,6 @@ exports.createClass = async (req, res) => {
     });
 
     return res.status(200).json({ success: true, classId: newClass.id, name, message: 'Class created successfully' });
-  } catch (error) {
-    return res.status(401).json({ error: true, message: 'An error occurred' });
-  }
-};
-
-exports.getClass = async (req, res) => {
-  const { id, groupId } = req.body;
-
-  if (!id) {
-    return res.status(401).json({ error: true, message: 'Class Id is required' });
-  }
-
-  if (!groupId) {
-    return res.status(401).json({ error: true, message: 'Division Id is required' });
-  }
-
-  try {
-    const existingClass = await Class.findOne({
-      where: { id, groupId }
-    });
-
-    if (!existingClass) {
-      return res.status(401).json({ error: true, message: 'Class does not exist' });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: existingClass,
-      message: 'Class info fetched successfully'
-    });
   } catch (error) {
     return res.status(401).json({ error: true, message: 'An error occurred' });
   }
@@ -115,5 +86,24 @@ exports.deleteClass = async (req, res) => {
     });
   } catch (error) {
     return res.status(401).json({ error: true, message: 'An error occurred' });
+  }
+};
+
+exports.deleteAllClasses = async (req, res) => {
+  const { groupId } = req.body;
+
+  if (!groupId) {
+    return res.status(401).json({ error: true, message: 'Group Id is required' });
+  }
+
+  const classes = await Class.findAll({ where: { groupId } });
+
+  if (classes) {
+    try {
+      classes.forEach(async (item) => await item.destroy());
+      return res.status(200).json({ success: true, classes: [...classes], message: 'Classes deleted succesfully' });
+    } catch (error) {
+      return res.status(401).json({ error: true, message: 'An error occured' });
+    }
   }
 };
